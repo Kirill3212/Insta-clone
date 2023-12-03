@@ -11,6 +11,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 
 import { Avatar, Box, Flex, Link, Tooltip } from "@chakra-ui/react";
+
 import { Link as RouterLink } from "react-router-dom";
 
 const SideBar = () => {
@@ -111,10 +112,10 @@ const SideBar = () => {
         >
           <Link
             as={RouterLink}
+            to={"/auth"}
             display={"flex"}
             alignItems={"center"}
             justifyContent={{ base: "center", md: "flex-start" }}
-            to={"/auth"}
             gap={4}
             _hover={{ bg: "whiteAlpha.400" }}
             borderRadius={6}
