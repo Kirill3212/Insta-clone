@@ -34,7 +34,7 @@ const SideBar = () => {
       text: "Create",
     },
     {
-      icon: <Avatar size={"sm"} name="Nikola Tesla" src="/profilepic.png" />,
+      icon: <Avatar size={"sm"} name="Nikola Tesla" src="/profilepic.jpg" />,
       text: "Profile",
       link: "/asaprogrammer",
     },
@@ -124,7 +124,7 @@ const SideBar = () => {
             mt={"auto"}
           >
             <BiLogOut />
-            <Box display={{ base: "none", md: "block" }}>Logout</Box>
+            <Box display={{ base: "none", md: "block" }}>Log out</Box>
           </Link>
         </Tooltip>
       </Flex>
