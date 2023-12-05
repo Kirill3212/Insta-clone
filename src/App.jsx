@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import PageLayout from "./Layout/PageLayout/PageLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/:username" element={<ProfilePage />}></Route>
       </Routes>
     </PageLayout>
   );
