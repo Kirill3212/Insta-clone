@@ -14,6 +14,7 @@ import {
   SkeletonCircle,
   Skeleton,
   VStack,
+  Link,
 } from "@chakra-ui/react";
 
 const ProfilePage = () => {
@@ -53,6 +54,7 @@ const ProfilePage = () => {
 
 export default ProfilePage;
 
+// NotFound
 const UserNotFound = () => {
   return (
     <Flex flexDir="column" textAlign={"center"} mx={"auto"}>
