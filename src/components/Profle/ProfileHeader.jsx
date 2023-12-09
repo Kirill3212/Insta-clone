@@ -4,6 +4,8 @@ import useAuthStore from "../../store/authStore";
 
 import EditProfile from "./EditProfile";
 
+import useFollowUser from "../../hooks/useFollowUser";
+
 import {
   AvatarGroup,
   Avatar,
@@ -23,6 +25,10 @@ const ProfileHeader = () => {
     authUser && authUser.userName === userProfile.userName;
   const visitingAnotherProfileAndAuth =
     authUser && authUser.userName !== userProfile.userName;
+
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
+    userProfile?.uid
+  );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -73,8 +79,10 @@ const ProfileHeader = () => {
                 color={"white"}
                 _hover={{ bg: "blue.600" }}
                 size={{ base: "xs", md: "sm" }}
+                onClick={handleFollowUser}
+                isLoading={isUpdating}
               >
-                Follow
+                {isFollowing ? "Unfollow" : "Follow"}
               </Button>
             </Flex>
           )}
