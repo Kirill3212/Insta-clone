@@ -9,7 +9,7 @@ import useUserProfileStore from "../store/userProfileStore";
 const useGetUserProfileByUsername = (userName) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
-  console.log(userName);
+
   const { userProfile, setUserProfile } = useUserProfileStore();
 
   useEffect(() => {
