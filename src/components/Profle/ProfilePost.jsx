@@ -1,9 +1,18 @@
+import { useState } from "react";
+
 import Comment from "../Comment/Comment";
 
 import PostFooter from "../FeedPosts/PostFooter";
 
 import useUserProfileStore from "../../store/userProfileStore";
 import useAuthStore from "../../store/authStore";
+import usePostStore from "../../store/postStore";
+
+import useShowToast from "../../hooks/useShowToast";
+
+import { deleteObject, ref } from "firebase/storage";
+import { firestore, storage } from "../../firebase/firebase";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 import {
   GridItem,
@@ -31,6 +40,36 @@ const ProfilePost = ({ post }) => {
 
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
+
+  const showToast = useShowToast();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const deletePost = usePostStore((state) => state.deletePost);
+  const deletePostsCount = useUserProfileStore((state) => state.deletePost);
+
+  const handleDeletePost = async () => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    if (isDeleting) return;
+
+    try {
+      const imageRef = ref(storage, `posts/${post.id}`);
+
+      await deleteObject(imageRef);
+      const userRef = doc(firestore, "users", authUser.uid);
+      await deleteDoc(doc(firestore, "posts", post.id));
+
+      await updateDoc(userRef, {
+        posts: arrayRemove(post.id),
+      });
+
+      deletePost(post.id);
+      deletePostsCount(post.id);
+      showToast("Success", "Post deleted successfully", "success");
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <>
@@ -134,6 +173,8 @@ const ProfilePost = ({ post }) => {
                       padding={1}
                       size={"sm"}
                       bg={"transparent"}
+                      onClick={handleDeletePost}
+                      isLoading={isDeleting}
                     >
                       <MdDelete size={20} cursor={"pointer"} />
                     </Button>
@@ -146,28 +187,13 @@ const ProfilePost = ({ post }) => {
                   // height={"350px"}
                   overflowY={"auto"}
                 >
-                  <Comment
-                    createdAt="1d ago"
-                    useName="Charlotte"
-                    profilePic="/profilepic.jpg"
-                    text="So vibrant"
-                  />
-                  <Comment
-                    createdAt="11d ago"
-                    useName="Abramov"
-                    profilePic={"https://bit.ly/dan-abramov"}
-                    text="Nice pic"
-                  />
-                  <Comment
-                    createdAt="7d ago"
-                    useName="Ryan Florence"
-                    profilePic={"https://bit.ly/ryan-florence"}
-                    text="You are beautiful"
-                  />
+                  {post.comments.map((comment) => (
+                    <Comment key={comment.id} comment={comment} />
+                  ))}
                 </VStack>
                 <Divider my={4} bg={"gray.800"} />
 
-                <PostFooter isProfilePage={true} />
+                <PostFooter isProfilePage={true} post={post} />
               </Flex>
             </Flex>
           </ModalBody>
