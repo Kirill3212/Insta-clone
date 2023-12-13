@@ -2,10 +2,13 @@ import Comment from "../Comment/Comment";
 
 import PostFooter from "../FeedPosts/PostFooter";
 
+import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
+
 import {
   GridItem,
   Flex,
-  Box,
+  Button,
   Text,
   Image,
   useDisclosure,
@@ -23,8 +26,11 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const ProfilePost = ({ img }) => {
+const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const userProfile = useUserProfileStore((state) => state.userProfile);
+  const authUser = useAuthStore((state) => state.user);
 
   return (
     <>
@@ -55,20 +61,20 @@ const ProfilePost = ({ img }) => {
             <Flex>
               <AiFillHeart size={20} />
               <Text fontWeight={"bold"} ml={2}>
-                7
+                {post.likes.length}
               </Text>
             </Flex>
             <Flex>
               <FaComment size={20}></FaComment>
               <Text fontWeight={"bold"} ml={2}>
-                7
+                {post.comments.length}
               </Text>
             </Flex>
           </Flex>
         </Flex>
 
         <Image
-          src={img}
+          src={post.imageURL}
           alt={"profile image"}
           w={"100%"}
           h={"100%"}
@@ -101,7 +107,7 @@ const ProfilePost = ({ img }) => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Image src={img} alt="profile post"></Image>
+                <Image src={post.imageURL} alt="profile post"></Image>
               </Flex>
               <Flex
                 flex={1}
@@ -112,21 +118,26 @@ const ProfilePost = ({ img }) => {
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={2}>
                     <Avatar
-                      src="/profilepic.jpg"
+                      src={userProfile.profilePicURL}
                       size={"sm"}
                       name="Charlotte"
                     />
                     <Text fontSize={12} fontWeight={"bold"}>
-                      Charlotte
+                      {userProfile.userName}
                     </Text>
                   </Flex>
-                  <Box
-                    _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
-                    borderRadius={4}
-                    padding={1}
-                  >
-                    <MdDelete size={20} cursor={"pointer"} />
-                  </Box>
+
+                  {authUser?.uid === userProfile.uid && (
+                    <Button
+                      _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
+                      borderRadius={4}
+                      padding={1}
+                      size={"sm"}
+                      bg={"transparent"}
+                    >
+                      <MdDelete size={20} cursor={"pointer"} />
+                    </Button>
+                  )}
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
                 <VStack
