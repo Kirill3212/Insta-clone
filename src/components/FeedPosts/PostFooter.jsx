@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import usePostComment from "../../hooks/usePostComment";
 
@@ -24,6 +24,7 @@ const PostFooter = ({ post, username, isProfilePage }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(1000);
   const [comment, setComment] = useState("");
+  const commentRef = useRef(null);
 
   const authUser = useAuthStore((state) => state.user);
 
@@ -50,7 +51,11 @@ const PostFooter = ({ post, username, isProfilePage }) => {
         <Box onClick={handleLike} cursor={"pointer"} fontSize={18}>
           {!liked ? <NotificationsLogo /> : <UnlikeLogo />}
         </Box>
-        <Box cursor={"pointer"} fontSize={18}>
+        <Box
+          cursor={"pointer"}
+          fontSize={18}
+          onClick={() => commentRef.current.focus()}
+        >
           <CommentLogo />
         </Box>
       </Flex>
@@ -85,6 +90,7 @@ const PostFooter = ({ post, username, isProfilePage }) => {
               fontSize={14}
               onChange={(e) => setComment(e.target.value)}
               value={comment}
+              ref={commentRef}
             ></Input>
             <InputRightElement>
               <Button

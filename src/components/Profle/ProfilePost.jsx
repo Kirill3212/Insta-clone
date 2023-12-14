@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Comment from "../Comment/Comment";
+import Caption from "../Comment/Caption";
 
 import PostFooter from "../FeedPosts/PostFooter";
 
@@ -180,12 +181,10 @@ const ProfilePost = ({ post }) => {
                   )}
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
-                <VStack
-                  w={"full"}
-                  alignItems={"start"}
-                  // height={"350px"}
-                  overflowY={"auto"}
-                >
+                <VStack w={"full"} alignItems={"start"} overflowY={"auto"}>
+                  {/* Caption */}
+                  {post.caption && <Caption post={post} />}
+                  {/* Comments */}
                   {post.comments.map((comment) => (
                     <Comment key={comment.postId} comment={comment} />
                   ))}
