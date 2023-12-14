@@ -37,7 +37,6 @@ import { MdDelete } from "react-icons/md";
 
 const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
 
@@ -188,7 +187,7 @@ const ProfilePost = ({ post }) => {
                   overflowY={"auto"}
                 >
                   {post.comments.map((comment) => (
-                    <Comment key={comment.id} comment={comment} />
+                    <Comment key={comment.postId} comment={comment} />
                   ))}
                 </VStack>
                 <Divider my={4} bg={"gray.800"} />

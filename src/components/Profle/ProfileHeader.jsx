@@ -20,7 +20,6 @@ const ProfileHeader = () => {
   const { userProfile } = userProfileStore();
 
   const authUser = useAuthStore((state) => state.user);
-  console.log(userProfile);
 
   const visitingOwnProfileAndAuth =
     authUser && authUser.userName === userProfile.userName;

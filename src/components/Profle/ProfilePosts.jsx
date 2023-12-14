@@ -6,7 +6,6 @@ import { Grid, VStack, Skeleton, Box, Flex, Text } from "@chakra-ui/react";
 
 const ProfilePosts = () => {
   const { isLoading, posts } = useGetUserPosts();
-
   const noPostsFound = !isLoading && posts.length === 0;
   if (noPostsFound) return <NoPostsFound />;
 
@@ -28,7 +27,7 @@ const ProfilePosts = () => {
       {!isLoading && (
         <>
           {posts.map((post) => {
-            return <ProfilePost post={post} key={post.id} />;
+            return <ProfilePost key={post.id} post={post} />;
           })}
         </>
       )}

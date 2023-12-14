@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import useShowToast from "./useShowToast";
 
 import useAuthStore from "../store/authStore";
@@ -23,7 +25,7 @@ const usePostComment = () => {
       comment,
       createdAt: Date.now(),
       createdBy: authUser.uid,
-      postId,
+      postId: uuidv4(),
     };
     try {
       await updateDoc(doc(firestore, "posts", postId), {
