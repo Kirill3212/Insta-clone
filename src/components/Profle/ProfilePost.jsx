@@ -156,11 +156,7 @@ const ProfilePost = ({ post }) => {
               >
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={2}>
-                    <Avatar
-                      src={userProfile.profilePicURL}
-                      size={"sm"}
-                      name="Charlotte"
-                    />
+                    <Avatar src={userProfile.profilePicURL} size={"sm"} />
                     <Text fontSize={12} fontWeight={"bold"}>
                       {userProfile.userName}
                     </Text>
