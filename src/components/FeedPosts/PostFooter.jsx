@@ -25,7 +25,6 @@ const PostFooter = ({ post, username, isProfilePage }) => {
   const [comment, setComment] = useState("");
   const commentRef = useRef(null);
   const { isLiked, likes, handleLikePost } = useLikePost(post);
-  console.log(isLiked);
   const authUser = useAuthStore((state) => state.user);
 
   const { isCommenting, handlePostComment } = usePostComment();

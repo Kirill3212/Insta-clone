@@ -186,7 +186,6 @@ const ProfilePost = ({ post }) => {
                   ))}
                 </VStack>
                 <Divider my={4} bg={"gray.800"} />
-
                 <PostFooter isProfilePage={true} post={post} />
               </Flex>
             </Flex>

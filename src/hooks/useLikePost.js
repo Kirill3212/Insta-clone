@@ -9,12 +9,13 @@ import { firestore } from "../firebase/firebase";
 
 const useLikePost = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
-  console.log(post);
+
   const authUser = useAuthStore((state) => state.user);
 
   const [likes, setLikes] = useState(post.likes.length);
-
   const [isLiked, setIsLiked] = useState(post.likes.includes(authUser?.uid));
+  console.log("likes>>", likes);
+  console.log("isLiked>", isLiked);
 
   const showToast = useShowToast();
 

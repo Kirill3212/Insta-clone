@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const SuggestedUser = ({ user, setUser }) => {
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(user.uid);
   const authUser = useAuthStore((state) => state.user);
-  console.log(user);
 
   const onFollowUser = async () => {
     await handleFollowUser();
