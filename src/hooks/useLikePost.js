@@ -14,6 +14,7 @@ const useLikePost = (post) => {
 
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(authUser?.uid));
+
   console.log("likes>>", likes);
   console.log("isLiked>", isLiked);
 
