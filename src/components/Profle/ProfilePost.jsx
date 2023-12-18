@@ -45,7 +45,7 @@ const ProfilePost = ({ post }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const deletePost = usePostStore((state) => state.deletePost);
   const deletePostsCount = useUserProfileStore((state) => state.deletePost);
-
+  console.log(post);
   const handleDeletePost = async () => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     if (isDeleting) return;

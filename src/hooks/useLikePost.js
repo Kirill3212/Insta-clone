@@ -17,6 +17,7 @@ const useLikePost = (post) => {
 
   console.log("likes>>", likes);
   console.log("isLiked>", isLiked);
+  console.log("post>>>", post);
 
   const showToast = useShowToast();
 
@@ -33,6 +34,7 @@ const useLikePost = (post) => {
 
     try {
       const postRef = doc(firestore, "posts", post.id);
+
       await updateDoc(postRef, {
         likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
       });
