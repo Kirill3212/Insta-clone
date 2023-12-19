@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import useFollowUser from "../../hooks/useFollowUser";
 
+import { timeAgo } from "../../utils/timeAgo";
+
 import {
   Flex,
   Box,
@@ -39,7 +41,7 @@ const PostHeader = ({ post, profileCreator }) => {
               <Link to={`/${profileCreator.userName}`}>
                 {profileCreator.userName}
               </Link>
-              <Box color={"gray.500"}>1w</Box>
+              <Box color={"gray.500"}>{timeAgo(post.createdAt)}</Box>
             </Flex>
           </>
         ) : (
