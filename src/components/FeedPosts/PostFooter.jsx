@@ -7,6 +7,8 @@ import { timeAgo } from "../../utils/timeAgo";
 
 import useAuthStore from "../../store/authStore";
 
+import CommentsModal from "../Modals/CommentsModal";
+
 import {
   Flex,
   Box,
@@ -15,6 +17,7 @@ import {
   Input,
   InputRightElement,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import {
@@ -28,6 +31,7 @@ const PostFooter = ({ post, isProfilePage, profileCreator }) => {
   const commentRef = useRef(null);
   const { handleLikePost, isLiked, likes } = useLikePost(post);
   const authUser = useAuthStore((state) => state.user);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { isCommenting, handlePostComment } = usePostComment();
 
@@ -68,10 +72,19 @@ const PostFooter = ({ post, isProfilePage, profileCreator }) => {
             </Text>
           </Text>
           {post.comments.length > 0 && (
-            <Text fontSize={"sm"} color={"gray"} cursor={"pointer"}>
+            <Text
+              fontSize={"sm"}
+              color={"gray"}
+              cursor={"pointer"}
+              onClick={onOpen}
+            >
               View all {post.comments.length} comments
             </Text>
           )}
+          {/* Comments modal only in the home page */}
+          {isOpen ? (
+            <CommentsModal isOpen={onOpen} onClose={onClose} post={post} />
+          ) : null}
         </>
       )}
 
