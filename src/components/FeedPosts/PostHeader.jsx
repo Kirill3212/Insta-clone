@@ -53,6 +53,7 @@ const PostHeader = ({ post, profileCreator }) => {
           </Flex>
         )}
       </Flex>
+
       <Box cursor={"pointer"}>
         <Button
           fontSize={12}
