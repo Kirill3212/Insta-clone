@@ -1,5 +1,6 @@
 import useFollowUser from "../../hooks/useFollowUser";
 import useAuthStore from "../../store/authStore";
+
 import { Avatar, Box, Button, Flex, VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
